@@ -4,10 +4,28 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import reducer from './reducers';
+import thunk from 'redux-thunk';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { createStore, applyMiddleware, compose } from 'redux';
+import { Provider } from 'react-redux';
+
+require('dotenv').config();
+
+let store = createStore(reducer, compose(applyMiddleware(thunk)));
+
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store = {store}>
+    <ToastContainer 
+        enableMultiContainer 
+        containerId={'toastMessage'} 
+        position={toast.POSITION.TOP_RIGHT} 
+        autoClose = {2000}
+    />
     <App />
-  </React.StrictMode>,
+  </Provider>, 
   document.getElementById('root')
 );
 

@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css?family=Stylish');
+.custom-btn{
+    background-color: #fff;
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+}
+.custom-btn:hover{
+    background-color: #fff !important;
+}
+.custom-btn:focus{
+    outline: 0;
+    background-color: #fff !important;
+}
+
+button :focus {
+    outline: 0 !important;
+}
+
+.logo-text{
+    font-family: 'Stylish', sans-serif;
+    font-size: 30px;
+}
+.logo-sub-text{
+    font-family: 'Stylish', sans-serif;
+    font-size: 20px;
+}
+
+.appBarHeading {
+    height: 26px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.appBarBread {
+    height: 19px;
+    font-size: 14px;
+    color: #8D8D8D;
+}
+
+/* PROFILE */
+
+.profileBackdropp {
+    height: 100%;
+    width: calc(100% - 294px);
+    background-color: #000000;
+    opacity: 0.5;
+    float: left;
+}
+
+.profileDiv {
+    height: 100%;
+    width: 294px;
+    background-color: #FFFFFF;
+    float: right;
+}
+
+.profileUpperBlock {
+    width: 294px;
+    height: 244px;
+    background: #282461 0% 0% no-repeat padding-box;
+    box-shadow: 0px 2px 8px #0000000F;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profileLetterCircle {
+    height: 124px;
+    width: 124px;
+    border-radius: 50%;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profileLetter {
+    width: 38px;
+    height: 94px;
+    font-size: 64px;
+    color: #282461;
+}
+
+.profileName {
+    height: 21px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #FFFFFF;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.crossBar {
+    margin-top: 15px;
+    height: 25px;
+    color: #FFFFFF;
+    top: 0;
+    z-index: 10000;
+    position: absolute;
+    right: 15px;
+    cursor: pointer;
+}
+
+.editBar {
+    margin-top: 15px;
+    height: 25px;
+    right: 15px;
+    cursor: pointer;
+}
+
+.profileChangeButton {
+    margin-top: 40px;
+    width: 100%;
+    height: 43px;
+    background: #F1F1F1 0% 0% no-repeat padding-box;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+/* CHANGE PASSWORD*/
+
+.changePasswordBackdrop {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    position: fixed;
+}
+
+.changeBlock {
+    width: 329px;
+    height: 438px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 2px 8px #0000000F;
+    border: 1px solid #D5D5D5C4;
+    border-radius: 4px;
+    z-index: 1000;
+}
+
+.changeCancel {
+    height: 39px;
+    background: #F1F1F1 0% 0% no-repeat padding-box;
+    font-size: 14px;
+    color: #A1A1A1;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.changeSubmit {
+    height: 39px;
+    background: #EA4D23 0% 0% no-repeat padding-box;
+    font-size: 14px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-weight: bold;
+}
