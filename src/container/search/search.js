@@ -53,7 +53,7 @@ class Search extends Component {
     onSearch = (event) => {
         var search = event.target.value;
         this.setState({ searchValue: search, loading: true });
-        axios.get('http://www.omdbapi.com/?apikey=c7311579&type=movie&page=1&s='+search)
+        axios.get('https://www.omdbapi.com/?apikey=c7311579&type=movie&page=1&s='+search)
         .then(res => {
             // console.log("res", res.data);
             if(res.data.Response==="False") {
