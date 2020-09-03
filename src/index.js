@@ -12,8 +12,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 
-require('dotenv').config();
-
 let store = createStore(reducer, compose(applyMiddleware(thunk)));
 
 ReactDOM.render(

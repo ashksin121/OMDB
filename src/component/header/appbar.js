@@ -3,6 +3,8 @@ import AppBar from "@material-ui/core/AppBar";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles"
 import Divider from "@material-ui/core/Divider";
+import PersonIcon from '@material-ui/icons/Person';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const drawerWidth = 220;
 
@@ -21,7 +23,11 @@ const styles = theme => ({
         background: "#FFFFFF 0% 0% no-repeat padding-box",
         borderRadius: "2px",
         opacity: "1",
-        height: "61px"
+        height: "61px",
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "flex-end",
+        alignItems: "center"
     }
 });
 class Appbar extends Component {
@@ -32,6 +38,11 @@ class Appbar extends Component {
     componentWillMount() {
     }
 
+    handleSignout = () => {
+        localStorage.removeItem('authToken');
+        window.location = '/login';
+    }
+
     render() {
 
         const { classes } = this.props;
@@ -39,8 +50,12 @@ class Appbar extends Component {
         return (
         <div>
             <AppBar position="fixed" className={classes.appBar} elevation={0}>
-            
             <Divider />
+            <Tooltip title="Sign Out">
+            <div onClick={this.handleSignout} style={{marginRight: "20px", height: "50px", width: "50px", borderRadius: "50%", backgroundColor: "#EA4D23", display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer"}}>
+            <PersonIcon style={{float: "right", color: "white", fontSize: "30px"}} />
+            </div>
+            </Tooltip>
             </AppBar>
         </div>
         );

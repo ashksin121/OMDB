@@ -53,7 +53,7 @@ class Search extends Component {
     onSearch = (event) => {
         var search = event.target.value;
         this.setState({ searchValue: search, loading: true });
-        axios.get('https://www.omdbapi.com/?apikey=c7311579&type=movie&page=1&s='+search)
+        axios.get(`https://www.omdbapi.com/?apikey=c7311579&type=movie&page=1&s=${search}`)
         .then(res => {
             // console.log("res", res.data);
             if(res.data.Response==="False") {
@@ -85,7 +85,8 @@ class Search extends Component {
         // console.log("click", data);
         let newData = this.props.nominationState.nominations;
         newData.push(data);
-        this.props.setNominations(newData, this.props.nominationState.nominations);
+        const oldData = this.props.nominationState.nominations;
+        this.props.setNominations(newData, oldData);
     }
 
     render() {
@@ -95,7 +96,7 @@ class Search extends Component {
             nominations
         } = this.props.nominationState;
 
-        // console.log("Redux", nominations);
+        // console.log("Redux", nominations,this.state.nominations);
 
         return (
             <div className="app-wrapper" style={{paddingBottom: "20px"}}>
@@ -112,21 +113,33 @@ class Search extends Component {
                             placeholder="Movie Title"
                             autoFocus
                             onChange={this.onSearch}
+                            fullWidth
                         />
                     </div>
                 </div>
                 {
                     this.state.loading ?
-                    <CircularProgress /> :
+                    <div className="responseMsg">
+                        <CircularProgress />
+                    </div> :
                     this.state.searchResponse===false ? 
                     <div className="responseMsg">
+                        <ErrorIcon style={{fontSize: "70px"}} />
                         {this.state.responseMsg}
                     </div> :
                     <div className="resultList" style={{height: "calc(100vh - 281px)"}}>
                         <Container>
                         {
-                            this.state.searchResult.map(data => {
-                                var found = this.state.nominations.includes(data);
+                            this.state.searchResult.map(movie => {
+                                var data = {
+                                    poster: movie.Poster,
+                                    title: movie.Title,
+                                    year: movie.Year,
+                                    imdbId: movie.imdbID
+                                }
+                                var found = false;
+                                found = this.state.nominations.some(mov => mov.poster===data.poster && mov.title===data.title && mov.year===data.year && mov.imdbId===data.imdbId)
+                                // console.log("Data", data, found)
                                 return (
                                     <Grid container style={{ display: "flex", justifyContent: "center"}}>
                                         <Grid item xs={12} sm={10} md={12} style={{ display: "flex", justifyContent: "center"}}>
@@ -136,20 +149,20 @@ class Search extends Component {
                                                         <Grid container direction="row" alignItems="center" spacing={2} style={{ height: "100%" }}>
                                                             <Grid item xs={3} sm={3} md={3}>
                                                                 {
-                                                                    data.Poster==="N/A" ?
+                                                                    data.poster==="N/A" ?
                                                                     <div className="posterNA">
                                                                         <ErrorIcon style={{ fontSize: "40px" }} />
                                                                     </div> :
-                                                                    <img src={data.Poster} alt="Poster" className="poster" />
+                                                                    <img src={data.poster} alt="Poster" className="poster" />
                                                                 }
                                                             </Grid>
                                                             <Grid item xs={7} sm={7} md={7}>
                                                                 <div className="movieTitle">
-                                                                    {data.Title}
+                                                                    {data.title}
                                                                 </div>
                                                                 <div className="movieDate">
                                                                     <CalendarTodayIcon style={{ color: "#8d8d8d", marginRight: "10px"}} />
-                                                                    {data.Year}
+                                                                    {data.year}
                                                                 </div>
                                                             </Grid>
                                                             <Grid item xs={2} sm={2} md={2} style={{height: "100%"}}>
@@ -157,10 +170,10 @@ class Search extends Component {
                                                                     found ?
                                                                     <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "flex-start", height: "100%"}}>
                                                                         <div className="nominateButton" style={{
-                                                                            backgroundColor: "#8d8d8d",
+                                                                            backgroundColor: "#36BE73",
                                                                             cursor: "not-allowed"
                                                                         }}>
-                                                                            <StarIcon style={{marginRight: "3px"}} /> Nominate
+                                                                            <StarIcon style={{marginRight: "3px"}} /> Nominated
                                                                         </div>
                                                                     </div> :
                                                                     <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "flex-start", height: "100%"}}>
@@ -168,7 +181,7 @@ class Search extends Component {
                                                                             backgroundColor: "#eaee16",
                                                                             cursor: "pointer"
                                                                         }} onClick={() => this.handleClick(data)}>
-                                                                            <StarIcon style={{marginRight: "3px"}} /> Nominate
+                                                                            Nominate
                                                                         </div>
                                                                     </div>
                                                                 }

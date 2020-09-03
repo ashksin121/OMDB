@@ -66,10 +66,13 @@ class Nominations extends Component {
                 </div>
                 {
                     this.state.loading ?
-                    <CircularProgress /> :
+                    <div className="responseMsg">
+                        <CircularProgress />
+                    </div> :
                     (!this.state.nominations) || this.state.nominations.length==0 ? 
                     <div className="responseMsg">
-                        No Nominations Made!!
+                        <ErrorIcon style={{fontSize: "70px"}} />
+                        No Nominations Made!!!
                     </div> :
                     <div className="resultList">
                         <Container>
@@ -84,20 +87,20 @@ class Nominations extends Component {
                                                         <Grid container direction="row" alignItems="center" spacing={2} style={{ height: "100%" }}>
                                                             <Grid item xs={3} sm={3} md={3}>
                                                                 {
-                                                                    data.Poster==="N/A" ?
+                                                                    data.poster==="N/A" ?
                                                                     <div className="posterNA">
                                                                         <ErrorIcon style={{ fontSize: "40px" }} />
                                                                     </div> :
-                                                                    <img src={data.Poster} alt="Poster" className="poster" />
+                                                                    <img src={data.poster} alt="Poster" className="poster" />
                                                                 }
                                                             </Grid>
                                                             <Grid item xs={7} sm={7} md={7}>
                                                                 <div className="movieTitle">
-                                                                    {data.Title}
+                                                                    {data.title}
                                                                 </div>
                                                                 <div className="movieDate">
                                                                     <CalendarTodayIcon style={{ color: "#8d8d8d", marginRight: "10px"}} />
-                                                                    {data.Year}
+                                                                    {data.year}
                                                                 </div>
                                                             </Grid>
                                                             <Grid item xs={2} sm={2} md={2} style={{height: "100%"}}>

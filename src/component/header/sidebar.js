@@ -102,12 +102,13 @@ class Sidebar extends Component {
     const drawer = (
       <div style={{
           width: "100%",
-          backgroundColor: "#2c3642",
+          backgroundColor: "#282461",
           maxWidth: "220px",
           height: "100%"
       }}>
         <div className={classes.toolbar} >
           {/* <a href="/"><img src={smallLogo} alt="small logo" width="130px" /></a> */}
+          <span className="topBarName">OMDB</span>
         </div>
         <Divider />
         <List className="nav-bar-menu-list" style={{padding: "0", width: "220px", paddingBottom: "20px"}}>

@@ -6,7 +6,10 @@ import Login from './container/login/login';
 import Search from './container/search/search';
 import Header from './component/header/header';
 import Nominations from './container/nominations/nominations'
+import Signup from './container/signup/signup';
 import './App.css';
+
+require('dotenv').config();
 
 const styles = theme => ({
   root: {
@@ -43,9 +46,10 @@ class App extends Component {
     render() {
       const { classes } = this.props;
       console.log(window.location.pathname)
-      return (
-        <div className="App">
-          {/* <FrontScreen showFront={this.state.showFront} />   */}
+      const authToken = localStorage.getItem('authToken');
+
+      if(authToken) {
+        return (
           <Router> 
             <Header />
             <main className={classes.content}>
@@ -56,9 +60,19 @@ class App extends Component {
                   <Redirect to={'/search'} />
                 </Switch>
             </main>
-          </Router>      
-        </div>
-      );
+          </Router>
+        );
+      } else {
+        return (
+          <Router>
+            <Switch>
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/signup" component={Signup} />
+              <Redirect to={'/login'} />
+            </Switch>
+          </Router>
+        );
+      }
     }
 }
 
