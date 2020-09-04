@@ -13,7 +13,8 @@ import axios from 'axios';
 import { connect } from "react-redux";
 
 import {
-    setNominations
+    setNominations,
+    getNominations
 } from '../../actions/nominations';
 
 const styles = () => ({
@@ -36,6 +37,7 @@ class Nominations extends Component {
     }
 
     componentDidMount() {
+        this.props.getNominations();
         if(this.props.nominationState.nominations) {
             this.setState({ nominations: this.props.nominationState.nominations })
         }
@@ -57,7 +59,7 @@ class Nominations extends Component {
             nominations
         } = this.props.nominationState;
 
-        console.log("Redux", this.state.nominations);
+        console.log("Redux", nominations);
 
         return (
             <div className="app-wrapper" style={{paddingBottom: "20px"}}>
@@ -69,7 +71,7 @@ class Nominations extends Component {
                     <div className="responseMsg">
                         <CircularProgress />
                     </div> :
-                    (!this.state.nominations) || this.state.nominations.length==0 ? 
+                    (!nominations) || nominations.length==0 ? 
                     <div className="responseMsg">
                         <ErrorIcon style={{fontSize: "70px"}} />
                         No Nominations Made!!!
@@ -77,7 +79,7 @@ class Nominations extends Component {
                     <div className="resultList">
                         <Container>
                         {
-                            this.state.nominations.map(data => {
+                            nominations.map(data => {
                                 return (
                                     <Grid container style={{ display: "flex", justifyContent: "center"}}>
                                         <Grid item xs={12} sm={10} md={12} style={{ display: "flex", justifyContent: "center"}}>
@@ -127,7 +129,7 @@ class Nominations extends Component {
                     </div>
                 }
                 {
-                    this.state.nominations.length === 5 ?
+                    nominations.length === 5 ?
                     <div className="warning">
                         You have made 5 nominations!!
                     </div> :
@@ -148,6 +150,9 @@ const mapDispatchToProps = dispatch => {
     return {
         setNominations: (data, oldData) => {
             return dispatch(setNominations(data, oldData))
+        },
+        getNominations: () => {
+            return dispatch(getNominations())
         }
     }
 }

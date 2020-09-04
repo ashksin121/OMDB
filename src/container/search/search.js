@@ -13,7 +13,8 @@ import axios from 'axios';
 import { connect } from "react-redux";
 
 import {
-    setNominations
+    setNominations,
+    getNominations
 } from '../../actions/nominations';
 
 const styles = () => ({
@@ -45,6 +46,7 @@ class Search extends Component {
     }
 
     componentDidMount() {
+        this.props.getNominations();
         if(this.props.nominationState.nominations) {
             this.setState({ nominations: this.props.nominationState.nominations })
         }
@@ -96,7 +98,7 @@ class Search extends Component {
             nominations
         } = this.props.nominationState;
 
-        // console.log("Redux", nominations,this.state.nominations);
+        console.log("Redux", nominations,this.state.nominations);
 
         return (
             <div className="app-wrapper" style={{paddingBottom: "20px"}}>
@@ -138,7 +140,7 @@ class Search extends Component {
                                     imdbId: movie.imdbID
                                 }
                                 var found = false;
-                                found = this.state.nominations.some(mov => mov.poster===data.poster && mov.title===data.title && mov.year===data.year && mov.imdbId===data.imdbId)
+                                found = nominations.some(mov => mov.poster===data.poster && mov.title===data.title && mov.year===data.year && mov.imdbId===data.imdbId)
                                 // console.log("Data", data, found)
                                 return (
                                     <Grid container style={{ display: "flex", justifyContent: "center"}}>
@@ -199,7 +201,7 @@ class Search extends Component {
                     </div>
                 }
                 {
-                    this.state.nominations.length === 5 ?
+                    nominations.length === 5 ?
                     <div className="warning">
                         You have made 5 nominations!!
                     </div> :
@@ -220,6 +222,9 @@ const mapDispatchToProps = dispatch => {
     return {
         setNominations: (data, oldData) => {
             return dispatch(setNominations(data, oldData))
+        },
+        getNominations: () => {
+            return dispatch(getNominations())
         }
     }
 }

@@ -17,12 +17,44 @@ export const setNominations = (data, oldData) => {
             data.pop();
             dispatch(setData(data));
         } else {
-            toast.success("Nomination successfully updated", {
-                containerId: 'toastMessage'
+            var sendData = {
+                id: authToken,
+                data: data
+            }
+            db.collection('nominations').doc(authToken).set(sendData)
+            .then(doc => {
+                toast.success("Nomination successfully updated", {
+                    containerId: 'toastMessage'
+                })
+                dispatch(setData(data));
             })
-            dispatch(setData(data));
         }
    }
+}
+
+export const getNominations = () => {
+    return (dispatch) => {
+        db.collection('nominations').doc(authToken).get()
+        .then(doc => {
+            if(doc.exists) {
+                console.log("action", doc.data());
+                dispatch(setData(doc.data().data));
+            } else {
+                console.log("error");
+                // toast.success("Oh snap! Database error.", {
+                //     containerId: 'toastMessage'
+                // })
+                dispatch(setData([]));
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            toast.error("Ah snap! Server error.", {
+                containerId: 'toastMessage'
+            })
+            dispatch(setData([]));
+        })
+    }
 }
 
 export const setData = data => {
