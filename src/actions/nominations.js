@@ -23,6 +23,7 @@ export const setNominations = (data, oldData) => {
             }
             db.collection('nominations').doc(authToken).set(sendData)
             .then(doc => {
+                console.log("doc", doc)
                 toast.success("Nomination successfully updated", {
                     containerId: 'toastMessage'
                 })
