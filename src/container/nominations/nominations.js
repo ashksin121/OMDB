@@ -44,10 +44,10 @@ class Nominations extends Component {
     }
 
     handleClick = data => {
-        var newData = this.state.nominations;
+        var newData = this.props.nominationState.nominations;
         let i = newData.indexOf(data);
         newData.splice(i,1);
-        var oldData = this.state.nominations;
+        var oldData = this.props.nominationState.nominations;
         console.log(oldData);
         this.props.setNominations(newData, oldData);
     }

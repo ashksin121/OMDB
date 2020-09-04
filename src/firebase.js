@@ -4,14 +4,14 @@ import 'firebase/auth';
 import 'firebase/firestore';
 console.log(process.env.REACT_APP_API_KEY)
 const firebaseConfig = {
-  apiKey: 'AIzaSyBQqosJXQR-mb03om9cr-i3q0BurecewI4',
-  authDomain: 'ombd-shopify.firebaseapp.com',
-  databaseURL: 'https://ombd-shopify.firebaseio.com',
-  projectId: "ombd-shopify",
-  storageBucket: 'ombd-shopify.appspot.com',
-  messagingSenderId: '47343213018',
-  appId: '1:47343213018:web:b8a3e82695a36b31fb48e3',
-  measurementId: 'G-BRXK1J3WJE'
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
 
 // Initialize Firebase
