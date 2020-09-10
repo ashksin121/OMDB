@@ -4,10 +4,6 @@ A portal for movie nomination (at max 5) using [OMDB api](http://www.omdbapi.com
 
 ## Components
 
-![image](https://user-images.githubusercontent.com/36294722/92783862-c35c4d80-f3c3-11ea-850a-3565395fba17.png)
-![image](https://user-images.githubusercontent.com/36294722/92784149-01f20800-f3c4-11ea-8a5c-d6833fefa155.png)
-![image](https://user-images.githubusercontent.com/36294722/92784269-24842100-f3c4-11ea-9f8f-661e0130f870.png)
-
 * The projects uses **ReactJs** for the frontend development.
 * **Redux** is used for state management.
 * **Firebase Firestore** is used for storing the list of nominations corressponding to each user's unique id.
